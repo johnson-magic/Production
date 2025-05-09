@@ -9,6 +9,7 @@
 #include <windows.h>
 
 #include <string>
+#include <fstream>
 #include <opencv2/opencv.hpp>
 #include <onnxruntime_cxx_api.h>
 
@@ -20,12 +21,10 @@
 
 class SequenceInferencer {
     public:
-        SequenceInferencer(std::string& model_path){    
-            labels_ = {"0", "90", "180", "270"};
-            
-            // image_path_ = return_image_path(image_path);
+        SequenceInferencer(std::string& model_path, std::string& charset_path){   
             model_path_ = model_path;
-            Init(model_path_);
+            charset_path_ = charset_path;
+            Init(model_path_, charset_path_);
         };
 
         void GetInputInfo();
@@ -36,7 +35,7 @@ class SequenceInferencer {
         void PreProcess(cv::Mat& image);
         void Inference();
         void PostProcess();
-        std::pair<std::vector<int>, std::vector<float>> SequenceInferencer::GetRes();
+        std::pair<std::vector<int>, std::vector<char>> SequenceInferencer::GetRes();
 
         void Release();
         
@@ -48,9 +47,12 @@ class SequenceInferencer {
 
         std::string image_path_;
         std::string model_path_;
-	std::vector<std::string> labels_;
+        std::string charset_path_;
+	    std::vector<char> charset_;  // charset of sequence model
+        int charset_len_;
+        int charset_len_with_blank_;  // "--hh-e-l-ll-oo--", "-" represents blank
         
-	cv::Mat image_;
+	    cv::Mat image_;
         // Ort::Value input_tensor_;
         std::vector<Ort::Value> ort_outputs_;
         
@@ -73,14 +75,28 @@ class SequenceInferencer {
         std::vector<int> predictions_;
         std::vector<float> scores_;
         std::vector<int> decoded_indices_;
+        std::vector<char> decoded_chars_;
 
-        void Init(std::string model_path){
+        void Init(std::string &model_path, std::string &charset_path){
             static Ort::Env env(ORT_LOGGING_LEVEL_WARNING, "default");  //holds the logging state 
             
             Ort::SessionOptions option;
             option.SetIntraOpNumThreads(1);
             option.SetGraphOptimizationLevel(ORT_ENABLE_ALL);
             session_ = new Ort::Session(env, ConvertToWString(model_path).c_str(), option);
+
+            std::ifstream file(charset_path);
+            if (file.is_open()) {
+                std::string line;
+                while (std::getline(file, line)) {
+                    charset_.push_back(line[0]);  // string ->[0]-> char
+                }
+                file.close();
+            }
+            charset_len_ = charset_.size();
+            charset_len_with_blank_ = charset_len_ + 1;
+
+
         }
 
         //Ort::Env

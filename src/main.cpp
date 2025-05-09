@@ -154,7 +154,7 @@ int main(){
     std::string img_path = "2022-12-08 14-54-28_000001.bmp";
     Inferencer detector(detector_model_path);
     ClassifierInferencer classifier(classifier_model_path);
-    SequenceInferencer sequence(sequence_model_path);
+    SequenceInferencer sequence(sequence_model_path, charset_path);
     
     detector.GetInputInfo();
 	detector.GetOutputInfo();
@@ -230,11 +230,11 @@ int main(){
         sequence.PreProcess(image_crop);  //不仅仅要支持image_path, 而且要支持image TO DO
         sequence.Inference();
         sequence.PostProcess();
-        std::pair<std::vector<int>, std::vector<float>> sequence_res = sequence.GetRes();
-        std::vector<int> sequence_classes = sequence_res.first;
-        std::vector<float> sequence_scores = sequence_res.second;
-        for(int j=0; j<sequence_classes.size(); j++){
-            std::cout<<"class: "<<sequence_classes[j]<<"scores: "<<sequence_scores[j]<<std::endl;
+        std::pair<std::vector<int>, std::vector<char>> sequence_res = sequence.GetRes();
+        std::vector<int> sequence_ids = sequence_res.first;
+        std::vector<char> sequence_chars = sequence_res.second;
+        for(int j=0; j<sequence_ids.size(); j++){
+            std::cout<<"sequence_id: "<<sequence_ids[j]<<"; sequence_char: "<<sequence_chars[j]<<std::endl;
         }
     }
 
