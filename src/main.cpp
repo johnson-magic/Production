@@ -146,9 +146,10 @@ int point_side(cv::Point2f point1, cv::Point2f point2, cv::Point2f point) {
 }
 
 int main(){
-    std::string detector_model_path = "detector.onnx";
-    std::string classifier_model_path = "text_direction_classify.onnx";
-    std::string sequence_model_path = "crnn.onnx";
+    std::string detector_model_path = "text_det.onnx";
+    std::string classifier_model_path = "text_direction_cla.onnx";
+    std::string sequence_model_path = "text_rec.onnx";
+    std::string charset_path = "charset.txt";
 
     std::string img_path = "2022-12-08 14-54-28_000001.bmp";
     Inferencer detector(detector_model_path);
