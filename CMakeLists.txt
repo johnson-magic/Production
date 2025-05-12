@@ -24,8 +24,14 @@ find_package(OpenCV REQUIRED)
 # 设置可执行文件名
 set(SOURCES
     src/main.cpp
+    src/detector_pipeline.cpp
+    src/classifier_pipeline.cpp
+    src/sequence_pipeline.cpp
+    src/plugin_pipeline.cpp
+    src/utils.cpp
 )
 add_executable(${PROJECT_NAME} ${SOURCES}) # main.cpp 为你的源文件名称
+include_directories("./include")
 include_directories("./thirdparty")
 
 # 链接 OpenCV 库和 ONNX Runtime 库
