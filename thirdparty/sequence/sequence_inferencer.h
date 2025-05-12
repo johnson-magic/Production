@@ -35,7 +35,7 @@ class SequenceInferencer {
         void PreProcess(cv::Mat& image);
         void Inference();
         void PostProcess();
-        std::pair<std::vector<int>, std::vector<char>> SequenceInferencer::GetRes();
+        std::pair<std::vector<int>, std::vector<char>> GetRes();
 
         void Release();
         

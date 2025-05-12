@@ -38,6 +38,7 @@ class Inferencer {
 
 
         void PreProcess(std::string& image_path);
+        void PreProcess(cv::Mat image);
         void Inference();
         void PostProcess();
 
