@@ -4,7 +4,7 @@
 #include <algorithm>
 
 
-void drawRotatedRect(cv::Mat& image, const cv::RotatedRect& rotatedRect);
+void drawRotatedRect(cv::Mat& image, const cv::RotatedRect& rotatedRect, cv::Scalar color);
 void rotateImage(cv::Mat& src, cv::Mat& dst, int degree);
 cv::Point2f GetCenterPoint(std::vector<cv::Point2f>& coors);
 std::vector<cv::Point2f> convert_coordinates(const std::vector<cv::Point2f>& coors);

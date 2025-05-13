@@ -22,12 +22,12 @@ bool hasImageUpdated(const std::string& image_path, std::filesystem::file_time_t
 
 
 
-void drawRotatedRect(cv::Mat& image, const cv::RotatedRect& rotatedRect) {
+void drawRotatedRect(cv::Mat& image, const cv::RotatedRect& rotatedRect, cv::Scalar color) {
 
     cv::Point2f vertices[4];
     rotatedRect.points(vertices);
     for(int i = 0; i < 4; ++i) {
-		cv::line(image, vertices[i], vertices[(i + 1) % 4], cv::Scalar(0, 255, 0), 2);
+		cv::line(image, vertices[i], vertices[(i + 1) % 4], color, 2);
 	}
           
 }
