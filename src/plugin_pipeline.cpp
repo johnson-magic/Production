@@ -186,9 +186,24 @@ void get_angle(cv::Point2f point1, cv::Point2f point2, int cls, int img_w, int i
     const double radians = std::atan(dy/dx);
     
     
-    double degrees = -radians * (180.0 / PI);
+    double degrees = radians * (180.0 / PI);
 
-    angle = fmod(degrees - angle_rotate, 360); 
+    if(degrees - angle_rotate > 0){
+        angle = fmod(degrees - angle_rotate, 180);
+        if(angle > 90){
+            angle = angle -180;
+        }
+    }
+    else if(degrees - angle_rotate < 0){
+        angle = fmod(degrees - angle_rotate, -180);
+        if(angle <= -90){
+            angle = 180 + angle;
+        }
+    }
+    else{
+        angle = 0;
+    }
+   
 }
 // detector_res, direction_res, text_res, res_path, img, vis_path, img_w, img_h
 
