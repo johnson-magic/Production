@@ -106,20 +106,12 @@ int main(int argc, char** argv){
 
     std::filesystem::file_time_type lastCheckedTime = std::filesystem::file_time_type();
     
-    cv::Scalar pixel_sum=0;
+    cv::Scalar pre_pixel_sum=cv::Scalar(0, 0, 0, 0);
 
 
     while (keepRunning) {
-        if (hasImageUpdated(img_path, lastCheckedTime)) {
-        //if(check_file_modified(img_path))
-        //while(keepRunning && isFileStable(img_path))
-       // {
-			std::this_thread::sleep_for(std::chrono::milliseconds(100));
-            // std::this_thread::sleep_for(std::chrono::minutes(1));
+        if (hasImageUpdated(img_path, pre_pixel_sum)) {
 
-
-            
-     
             std::vector<RotatedObj> detector_res;
             std::vector<int> direction_res;
             std::vector<std::string> text_res;
@@ -141,6 +133,17 @@ int main(int argc, char** argv){
 
             detector_res = detector_infer(detectordfd, img);
             for(auto rotated_obj : detector_res){
+                // cv::Point2f vertices[4];
+                // rotated_obj.rotated_rect.points(vertices);
+                // if(rotated_obj.class_index == 0){
+                //     drawRotatedRect(img_copy, rotated_obj.rotated_rect, cv::Scalar(255, 0, 0));
+                // }
+                // else if(rotated_obj.class_index == 1){
+                //     drawRotatedRect(img_copy, rotated_obj.rotated_rect, cv::Scalar(0, 255, 0));
+                // }
+                // else{
+                //     drawRotatedRect(img_copy, rotated_obj.rotated_rect, cv::Scalar(0, 0, 255));
+                // }
                 if(rotated_obj.class_index != 2){
                     continue;
                 }
@@ -152,12 +155,14 @@ int main(int argc, char** argv){
                 
                 rotateImage(img_crop, img_crop, 360 - cls * 90);
                 
+                
                 std::string text = sequence_pipeline(sequence, img_crop);
                 text_res.push_back(text);
 
             }
 
             plugin_pipeline(detector_res, direction_res, text_res, res_path, img, vis_path, img_w, img_h);
+            std::cout<<"process finished"<<std::endl;
             img.release();
 
             

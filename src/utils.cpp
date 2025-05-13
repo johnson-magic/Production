@@ -2,25 +2,17 @@
 
 // #define PI acos(-1)
 
-bool hasImageUpdated(const std::string& image_path, std::filesystem::file_time_type& lastCheckedTime) {
-    
-    if (!std::filesystem::exists(image_path)) {
-        std::cout << "file does not exists: " << image_path << std::endl;
+bool hasImageUpdated(const std::string& img_path, cv::Scalar &pre_pixel_sum){
+    cv::Mat img_temp = cv::imread(img_path);
+    cv::Scalar cur_pixel_sum=cv::sum(img_temp);
+    if(pre_pixel_sum == cur_pixel_sum){
         return false;
     }
-    std::this_thread::sleep_for(std::chrono::milliseconds(300));
-
-    std::filesystem::file_time_type curWriteTime = std::filesystem::last_write_time(image_path);
-    
-    if (curWriteTime != lastCheckedTime) {
-        lastCheckedTime = curWriteTime;
+    else{
+        pre_pixel_sum = cur_pixel_sum;
         return true;
     }
-    
-    return false;
 }
-
-
 
 void drawRotatedRect(cv::Mat& image, const cv::RotatedRect& rotatedRect, cv::Scalar color) {
 
