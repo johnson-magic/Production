@@ -22,8 +22,8 @@ class Inferencer {
     public:
         Inferencer(std::string& model_path){    
 
-            modelScoreThreshold_ = 0.2;
-            modelNMSThreshold_ = 0.8;
+            modelScoreThreshold_ = 0.5;
+            modelNMSThreshold_ = 0.5;
             labels_ = {"big_cirlce","plates","slide"};
             
             // image_path_ = return_image_path(image_path);
