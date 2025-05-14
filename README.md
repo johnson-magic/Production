@@ -18,7 +18,7 @@
 ## 1. 使用
 ### 1.1 下载
 ```
-链接：https://pan.quark.cn/s/74663448c75f
+链接：https://pan.quark.cn/s/fa9089d51ba0
 ```
 ### 1.2 指令
 ```
