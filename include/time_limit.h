@@ -5,8 +5,8 @@
 #include <string>
 
 
-// struct TimeLimit
-// {
-//     std::string name;
-//     int left;    
-// };
+struct TimeLimit
+{
+    std::string name;
+    int left;    
+};
