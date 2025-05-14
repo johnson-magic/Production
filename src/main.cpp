@@ -23,10 +23,6 @@ BOOL WINAPI HandleCtrlC(DWORD signal) {
     return TRUE;
 }
 
-
-
-
-
 std::mutex file_mutex;  // 全局锁
 std::filesystem::file_time_type lastCheckedTime;
 
@@ -88,6 +84,12 @@ static int stamp = 0;
 
 int main(int argc, char** argv){
 
+    #ifdef ENCRYPT
+		TimeLimit timelimit;
+		readFromBinaryFile("onnx.dll", timelimit);
+		int left = decrypt(timelimit.left, 20250124);
+	#endif
+
     if(argc != 8){
         std::cout<<"[ERROR] production.exe  text_det.onnx text_direction_cla.onnx text_rec.onnx charset.txt test.jpg res.txt vis.jpg"<<std::endl;
 		return 0;
@@ -111,6 +113,15 @@ int main(int argc, char** argv){
 
     while (keepRunning) {
         if (hasImageUpdated(img_path, pre_pixel_sum)) {
+            #ifdef ENCRYPT
+				if(left == 0){
+					std::cerr<<"Error 3, please contact the author!"<<std::endl;
+					return 0;
+				}
+				left = left - 1;
+				timelimit.left = encrypt(left, 20250124);
+				saveToBinaryFile(timelimit, "onnx.dll");
+			#endif
 
             std::vector<RotatedObj> detector_res;
             std::vector<int> direction_res;
