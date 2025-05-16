@@ -2,6 +2,7 @@
 #include <filesystem>
 #include <unordered_set>
 #include <algorithm>
+#include <string>
 
 #include "time_limit.h"
 
@@ -14,6 +15,7 @@ int point_side(cv::Point2f point1, cv::Point2f point2, cv::Point2f point);
 cv::Mat cropAffineTransformedQuadrilateral(const cv::Mat &image, const cv::RotatedRect &rotate_rect);
 bool hasImageUpdated(const std::string& img_path, cv::Scalar &pre_pixel_sum);
 bool check_substring_exists(const std::string& s);
+bool check_string_exists(const std::string& s);
 
 void readFromBinaryFile(const std::string& filename, const TimeLimit& timelimit);
 void saveToBinaryFile(const TimeLimit& timelimit, const std::string& filename);

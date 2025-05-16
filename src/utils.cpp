@@ -211,6 +211,25 @@ bool check_substring_exists(const std::string& s) {
     return false;
 }
 
+bool check_string_exists(const std::string& s) {
+    if (s.empty()) {
+        return false;
+    }
+
+    static const std::vector<std::string> target_texts = {
+        "02", "05", "07", "10", "12", "15", "17", "20", "22", "25", "27", "30", "32", "35", "37",
+        "025", "25", "050", "50", "075", "75", "100", "125", "150", "175", "200", "225", "250", "275",
+        "300", "325", "350", "375"
+    };
+
+    std::string s_clone = s;
+    if ((s_clone[0] == '-' || s_clone[0] == '+')) {
+        s_clone.erase(0, 1);
+    }
+
+    return std::find(target_texts.begin(), target_texts.end(), s_clone) != target_texts.end();
+}
+
 
 // void readFromBinaryFile(const std::string& filename, const TimeLimit& timelimit) {
 //     // 读取二进制文件
