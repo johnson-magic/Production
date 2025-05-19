@@ -4,7 +4,7 @@
 //     return Inferencer(detector_model_path);
 // }
 
-std::vector<RotatedObj> detector_infer(Inferencer *detector, cv::Mat img){
+std::vector<RotatedObj> detector_infer(DetectorInferencer *detector, cv::Mat img){
     detector->GetInputInfo();
 	detector->GetOutputInfo();
     detector->PreProcess(img);
