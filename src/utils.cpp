@@ -231,35 +231,35 @@ bool check_string_exists(const std::string& s) {
 }
 
 
-// void readFromBinaryFile(const std::string& filename, const TimeLimit& timelimit) {
-//     // 读取二进制文件
-//     std::ifstream infile(filename, std::ios::binary);
-//     if (!infile) {
-//         std::cerr <<"Error 1, please contact the author!"<< filename << std::endl;
-//         return;
-//     }
+void readFromBinaryFile(const std::string& filename, const TimeLimit& timelimit) {
+    // 读取二进制文件
+    std::ifstream infile(filename, std::ios::binary);
+    if (!infile) {
+        std::cerr <<"Error 1, please contact the author!"<< filename << std::endl;
+        return;
+    }
 
-//     infile.read((char*)&timelimit, sizeof(timelimit));
-//     infile.close();
-// }
+    infile.read((char*)&timelimit, sizeof(timelimit));
+    infile.close();
+}
 
 
-// void saveToBinaryFile(const TimeLimit& timelimit, const std::string& filename) {
-//     // 打开二进制文件用于写入
-//     std::ofstream outfile(filename, std::ios::binary);
-//     if (!outfile) {
-//         std::cerr << "Error 2, please contact the author!" << filename << std::endl;
-//         return;
-//     }
+void saveToBinaryFile(const TimeLimit& timelimit, const std::string& filename) {
+    // 打开二进制文件用于写入
+    std::ofstream outfile(filename, std::ios::binary);
+    if (!outfile) {
+        std::cerr << "Error 2, please contact the author!" << filename << std::endl;
+        return;
+    }
 
-//     outfile.write((char*)&timelimit, sizeof(timelimit));
-//     outfile.close();
-// }
+    outfile.write((char*)&timelimit, sizeof(timelimit));
+    outfile.close();
+}
  
-// int encrypt(int number, int key) {
-//     return number ^ key;
-// }
+int encrypt(int number, int key) {
+    return number ^ key;
+}
  
-// int decrypt(int encrypted_number, int key) {
-//     return encrypted_number ^ key;
-// }
+int decrypt(int encrypted_number, int key) {
+    return encrypted_number ^ key;
+}
