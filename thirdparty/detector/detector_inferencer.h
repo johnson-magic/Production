@@ -12,8 +12,8 @@ class DetectorInferencer {
     public:
         DetectorInferencer(std::string& model_path, const int& class_num){    
 
-            modelScoreThreshold_ = 0.5;
-            modelNMSThreshold_ = 0.5;
+            modelScoreThreshold_ = 0.25;
+            modelNMSThreshold_ = 0.7;
             class_num_ = class_num;
 
             model_path_ = model_path;
