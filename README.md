@@ -4,6 +4,7 @@
 <!-- code_chunk_output -->
 
 - [PRODUCTION](#production)
+  - [0. 编译](#0-编译)
   - [1. 使用](#1-使用)
     - [1.1 下载](#11-下载)
     - [1.2 指令](#12-指令)
@@ -15,6 +16,15 @@
 <!-- /code_chunk_output -->
 
 # PRODUCTION
+## 0. 编译
+```
+conan profile path default
+cd Production
+conan install . --output-folder=build --build=missing
+cmake --preset conan-default
+cmake -B ./build -DCMAKE_BUILD_TYPE=Release
+cmake --build ./build/ --config Release
+```
 ## 1. 使用
 ### 1.1 下载
 ```
