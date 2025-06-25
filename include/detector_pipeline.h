@@ -1,4 +1,4 @@
-#include "detector/detector_inferencer.h"
+#include "detector_inference.h"
 
 
 // Inferencer detector_model_init(const std::string &detector_model_path);
