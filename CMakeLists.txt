@@ -22,6 +22,9 @@ list(APPEND CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/build/build/generators/")
 
 find_package(OpenCV REQUIRED)
 find_package(onnxruntime REQUIRED)
+find_package(detector_inference REQUIRED)
+find_package(classifier_inference REQUIRED)
+find_package(sequencer_inference REQUIRED)
 
 # 设置可执行文件名
 set(SOURCES
@@ -34,15 +37,14 @@ set(SOURCES
 )
 add_executable(${PROJECT_NAME} ${SOURCES}) # main.cpp 为你的源文件名称
 include_directories("./include")
-include_directories("./thirdparty")
 
 # 链接 OpenCV 库和 ONNX Runtime 库
 target_link_libraries(${PROJECT_NAME}
                       opencv::opencv
                       onnxruntime::onnxruntime
-                      "../thirdparty/detector/detector_inference"
-                      "../thirdparty/classifier/classifier_inference"
-                      "../thirdparty/sequence/sequence_inference")
+                      detector_inference::detector_inference
+                      classifier_inference::classifier_inference
+                      sequencer_inference::sequencer_inference)
 
 # 设置 C++ 标准
 set_target_properties(${PROJECT_NAME} PROPERTIES

@@ -1,4 +1,4 @@
-#include "classifier/classifier_inferencer.h"
+#include "classifier_inference.h"
 
 // ClassifierInferencer classifier_model_init(std::string classifier_model_path);
 

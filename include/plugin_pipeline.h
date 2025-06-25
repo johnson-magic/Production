@@ -5,7 +5,7 @@
 #include <opencv2/opencv.hpp>
 
 #include "utils.h"
-#include "detector/data_structure.h"
+#include "data_structure.h"
 
 
 // static std::vector<std::string> target_texts = {"02", "05", "07", "10", "12", "15", "17", "20", "22", "25", "27", "30", "32", "35", "37", 
