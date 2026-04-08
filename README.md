@@ -50,6 +50,7 @@ IsRight 1
 * [有向/通用目标检测训练库: PrecisionAngleDetection](https://github.com/johnson-magic/PrecisionAngleDetection)
 * [通用分类训练库: SimpleClassifier](https://github.com/johnson-magic/SimpleClassifier)
 * [通用sequence2sequence训练库: SimpleSequence](https://github.com/johnson-magic/SimpleSequence)
+* [基于QWen2vl公式微调库： FormulaRecognizer](https://github.com/johnson-magic/FormulaRecognizer)
 
 ## 2.2 推理库
 * [有向/通用目标检测推理库: PrecisionAngleDetectionInference](https://github.com/johnson-magic/PrecisionAngleDetectionInference)
